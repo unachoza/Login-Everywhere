@@ -24,3 +24,5 @@ yarn-error.log*
 
 #keys
 src/Config/
+./src/Config/index.js
+*Config/index.js

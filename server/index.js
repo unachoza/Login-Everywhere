@@ -5,6 +5,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const AmazonStrategy = require('passport-amazon').Strategy;
 const GithubStrategy = require('passport-github').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
 const InstagramStrategy = require('passport-instagram').Strategy;
 const TwitterStrategy = require('passport-twitter.js').Strategy;
 const keys = require('../src/Config/keysIndex.js~');

@@ -15,19 +15,19 @@
 .title {
   height: 100px;
   width: 620px;
+  margin: 0 auto;
+  margin-top: 50px;
   border: solid 1.5px rgb(35, 99, 236);
   background-color: rgba(139, 135, 135, 0.637);
-  z-index: 5;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
   font-size: 35px;
-  text-align: center;
-  opacity: 1;
-  z-index: 100;
   border-radius: 10px;
+  display: flex;
   align-items: center;
-  margin: 0 auto;
-  margin-top: 50px;
+  justify-content: center;
+  /* font-family: 'Oswald', sans-serif; */
+  font-family: 'Raleway', sans-serif;
 }
 
 .app-container {

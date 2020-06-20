@@ -10,8 +10,11 @@ const UserProvider = ({ children }) => {
       const result = await axios('/user');
       setUser(result.data);
     };
+    fetchingFromAPI();
   }, []);
 
   return <context.Provider value={user}>{children}</context.Provider>;
 };
 UserProvider.context = context;
+
+export default UserProvider;

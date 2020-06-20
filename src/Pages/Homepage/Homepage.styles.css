@@ -1,0 +1,20 @@
+.app-container {
+  height: 200px;
+  width: 300px;
+  /* display: flex;
+   */
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+  margin-top: 50px;
+  margin-left: 100px;
+  border: solid green 3px;
+  /* position: fixed; or absolute */
+  top: 50%;
+  left: 50%;
+}
+.title {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 35px;
+}

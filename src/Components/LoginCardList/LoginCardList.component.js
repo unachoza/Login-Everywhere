@@ -1,14 +1,14 @@
 import React from 'react';
 import LoginCard from 'Components/LoginCard/LoginCard.component';
-import { data } from 'Constants';
+import { data } from 'Constants/data';
 import 'Components/LoginCardList/LoginCardList.styles.css';
 
 const LoginCardList = () => {
   return (
-    <div>
-      <div className="title">LoginCardList Title</div>
+    <div style={{ height: '100', width: 100 }}>
+      <div className="list-title">LoginCardList Title</div>
       {data.map((app) => (
-        <Card {...app} key={app.name} />
+        <LoginCard {...app} key={app.name} />
       ))}
     </div>
   );

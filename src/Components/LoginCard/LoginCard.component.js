@@ -11,7 +11,7 @@ const LoginCard = ({ img, name, href, color }) => {
     >
       <div className="title">{NAME} LoginCard </div>
       <div
-        style={{ minheight: 200, minwidth: 200, background: `url("${img}") no-repeat center center / 50% ${color}` }}
+        style={{ height: 200, width: 200, background: `url("${img}") no-repeat center center / 50% ${color}` }}
       ></div>
     </div>
   );

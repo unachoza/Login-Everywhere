@@ -3,3 +3,9 @@
   font-weight: bold;
   font-size: 35px;
 }
+.card {
+  border: solid 4px black;
+  height: 200px;
+  width: 200px;
+  margin: 10px;
+}

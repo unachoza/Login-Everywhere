@@ -1,11 +1,12 @@
-.title {
+.login-title {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
-  font-size: 35px;
+  font-size: 15px;
+  color: rgb(241, 63, 152);
 }
 .card {
   border: solid 4px black;
-  height: 200px;
-  width: 200px;
   margin: 10px;
+  height: 150px;
+  width: 150px;
 }

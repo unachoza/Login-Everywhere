@@ -5,7 +5,7 @@ import 'Components/LoginCardList/LoginCardList.styles.css';
 
 const LoginCardList = () => {
   return (
-    <div style={{ height: '100', width: 100 }}>
+    <div className="list-container">
       <div className="list-title">LoginCardList Title</div>
       {data.map((app) => (
         <LoginCard {...app} key={app.name} />

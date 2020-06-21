@@ -1,2 +1,9 @@
 .list-title {
 }
+.list-container {
+  position: absolute;
+  border: hotpink 5px solid;
+  display: flex;
+  height: 600px;
+  flex-wrap: wrap;
+}

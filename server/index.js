@@ -102,6 +102,14 @@ passport.use(
 //   )
 // );
 
+passport.serializeUser((user, cb) => {
+  cb(null, user);
+});
+
+passport.deserializeUser((user, cb) => {
+  cb(null, user);
+});
+
 const server = express();
 server.use(cors());
 server.use(passport.initialize());

@@ -7,7 +7,7 @@ const GithubStrategy = require('passport-github').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const InstagramStrategy = require('passport-instagram').Strategy;
-const TwitterStrategy = require('passport-twitter.js').Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
 const keys = require('../src/Config/keysIndex.js~');
 const chalk = require('chalk');
 
@@ -87,20 +87,20 @@ passport.use(
   )
 );
 
-passport.use(
-  new TwitterStrategy(
-    {
-      clientID: keys.TWITTER.clientID,
-      clientSecret: keys.TWITTER.clientSecret,
-      callbackURL: '/auth/twitter/callback',
-    },
-    (accessToken, refreshToken, profile, cb) => {
-      console.log(chalk.blue(JSON.stringify(profile)));
-      user = { ...profile };
-      return cb(null, profile);
-    }
-  )
-);
+// passport.use(
+//   new TwitterStrategy(
+//     {
+//       clientID: keys.TWITTER.clientID,
+//       clientSecret: keys.TWITTER.clientSecret,
+//       callbackURL: '/auth/twitter/callback',
+//     },
+//     (accessToken, refreshToken, profile, cb) => {
+//       console.log(chalk.blue(JSON.stringify(profile)));
+//       user = { ...profile };
+//       return cb(null, profile);
+//     }
+//   )
+// );
 
 const server = express();
 server.use(cors());

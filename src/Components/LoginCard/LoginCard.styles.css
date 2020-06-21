@@ -1,12 +1,34 @@
 .login-title {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: bold;
   font-size: 15px;
-  color: rgb(241, 63, 152);
+  position: absolute;
+  color: white;
+  top: 20px;
 }
 .card {
-  border: solid 4px black;
   margin: 10px;
   height: 150px;
   width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  transition: all 0.2s;
+}
+.login-button::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.login-button:active,
+.login-button:focus {
+  outline: none;
+  transform: translateY(-1px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  transition: all 0.2s;
 }

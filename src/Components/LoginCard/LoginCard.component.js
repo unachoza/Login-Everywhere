@@ -7,10 +7,13 @@ const LoginCard = ({ img, name, href, color }) => {
     <div
       className="card"
       style={{ border: `solid ${color}`, borderRadius: 2 }}
-      onClick={() => (window.location = href)}
+      onClick={() => (window.location = `${href}`)}
     >
-      <div className="login-title">{NAME} LoginCard </div>
-      <div style={{ height: 80, width: 80, background: `url("${img}") no-repeat center center / 50% ${color}` }}></div>
+      <div className="login-title">{NAME} </div>
+      <div
+        className="login-button"
+        style={{ height: 150, width: 150, background: `url("${img}") no-repeat center center / 50% ${color}` }}
+      ></div>
     </div>
   );
 };

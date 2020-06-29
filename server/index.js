@@ -11,6 +11,8 @@ const TwitterStrategy = require('passport-twitter').Strategy;
 const session = require('express-session');
 const SpotifyStrategy = require('passport-spotify').Strategy;
 const SlackStrategy = require('passport-slack').Strategy;
+const YoutubeStrategy = require('passport-youtube').Strategy;
+const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 const keys = require('../src/Config/keysIndex.js~');
 const chalk = require('chalk');
 
@@ -136,6 +138,36 @@ passport.use(
       clientID: keys.SLACK.clientID,
       clientSecret: keys.SLACK.clientSecret,
       callbackURL: '/auth/slack/callback',
+    },
+    (accessToken, refreshToken, profile, cb) => {
+      console.log(chalk.blue(JSON.stringify(profile)));
+      user = { ...profile };
+      return cb(null, profile);
+    }
+  )
+);
+
+passport.use(
+  new YoutubeStrategy(
+    {
+      clientID: keys.YOUTUBE.clientID,
+      clientSecret: keys.YOUTUBE.clientSecret,
+      callbackURL: '/auth/youtube/callback',
+    },
+    (accessToken, refreshToken, profile, cb) => {
+      console.log(chalk.blue(JSON.stringify(profile)));
+      user = { ...profile };
+      return cb(null, profile);
+    }
+  )
+);
+passport.use(
+  new LinkedInStrategy(
+    {
+      clientID: keys.LINKEDIN.clientID,
+      clientSecret: keys.LINKEDIN.clientSecret,
+      callbackURL: 'http://localhost:3000/auth/linkedin/callback',
+      scope: ['r_emailaddress', 'r_basicprofile'],
     },
     (accessToken, refreshToken, profile, cb) => {
       console.log(chalk.blue(JSON.stringify(profile)));

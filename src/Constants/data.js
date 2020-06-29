@@ -6,6 +6,8 @@ import InstagramIcon from 'assests/instagram.png';
 import SpotifyIcon from 'assests/spotify.png';
 import TwitterIcon from 'assests/twitter.png';
 import YouTubeIcon from 'assests/youtube.png';
+import LinkedinIcon from 'assests/linkedin.png';
+import SlackIcon from 'assests/slack.png';
 
 export const data = [
   {
@@ -78,5 +80,28 @@ export const data = [
     alt: 'youtube-icon',
     color: '#ff0100',
     txt: 'Login with YouTube',
+  },
+
+  {
+    img: LinkedinIcon,
+    name: 'linkedin',
+    href: 'auth/linkedin',
+    alt: 'linkedin-icon',
+    color: '#0077b5',
+    txt: 'Login with Linkedin',
+  },
+  {
+    img: SlackIcon,
+    name: 'slack',
+    href: 'auth/slack',
+    alt: 'slack-icon',
+    colors: {
+      leftBot: '#e01f5a',
+      leftTop: '#ecb22e',
+      rightTop: '#2db67d',
+      rightBot: ' #37c5f0',
+      baseCoat: 'linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%)',
+    },
+    txt: 'Login with Slack',
   },
 ];

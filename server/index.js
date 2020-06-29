@@ -8,6 +8,7 @@ const GithubStrategy = require('passport-github').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const InstagramStrategy = require('passport-instagram').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
+const session = require('express-session');
 const SpotifyStrategy = require('passport-spotify').Strategy;
 const keys = require('../src/Config/keysIndex.js~');
 const chalk = require('chalk');
@@ -135,8 +136,15 @@ passport.use(
 
 const server = express();
 server.use(cors());
+server.use(
+  session({
+    secret: keys.SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 server.use(passport.initialize());
-
+server.use(passport.session());
 server.use(bodyParser.json()); // support json encoded bodies
 server.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 server.get('/auth/facebook', passport.authenticate('facebook'));

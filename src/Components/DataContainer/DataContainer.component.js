@@ -15,7 +15,8 @@ import React from 'react';
 
 const Terminal = ({ userData, selected }) => {
   const selectedData = selected === 'All' ? userData : userData[selected];
-  const jsonCode = JSON.stringify(userData, null, 4);
+  const removeRaw = (name, val) => (name === '_raw' ? undefined : val);
+  const jsonCode = JSON.stringify(userData, removeRaw, 4);
 
   return (
     <div className="window">
@@ -25,7 +26,7 @@ const Terminal = ({ userData, selected }) => {
           <div className="mac-btn minimize" />
           <div className="mac-btn zoom" />
         </div>
-        <p style={{ textAlign: 'left', margin: 0 }}>json-terminal</p>
+        <p style={{ textAlign: 'right', margin: 0 }}>json-terminal</p>
       </div>
       <div className="content">
         <pre>{jsonCode}</pre>

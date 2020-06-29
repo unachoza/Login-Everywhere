@@ -10,6 +10,7 @@ const InstagramStrategy = require('passport-instagram').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
 const session = require('express-session');
 const SpotifyStrategy = require('passport-spotify').Strategy;
+const SlackStrategy = require('passport-slack').Strategy;
 const keys = require('../src/Config/keysIndex.js~');
 const chalk = require('chalk');
 
@@ -31,7 +32,6 @@ passport.use(
       callbackURL: 'http://localhost:3000/auth/facebook/callback',
     },
     (accessToken, refreshToken, profile, cb) => {
-      console.log(chalk.blue(JSON.stringify(profile)));
       user = { ...profile };
       server.post('/user', (req, res) => {
         res.send(user);
@@ -97,7 +97,6 @@ passport.use(
       callbackURL: '/auth/google/callback',
     },
     (accessToken, refreshToken, profile, cb) => {
-      console.log(chalk.blue(JSON.stringify(profile)));
       user = { ...profile };
       return cb(null, profile);
     }
@@ -112,7 +111,6 @@ passport.use(
       callbackURL: '/auth/spotify/callback',
     },
     (accessToken, refreshToken, profile, cb) => {
-      console.log(chalk.blue(JSON.stringify(profile)));
       user = { ...profile };
       return cb(null, profile);
     }
@@ -125,6 +123,19 @@ passport.use(
       consumerSecret: keys.TWITTER.consumerSecret,
       callbackURL: '/auth/twitter/callback',
       includeEmail: true,
+    },
+    (accessToken, refreshToken, profile, cb) => {
+      user = { ...profile };
+      return cb(null, profile);
+    }
+  )
+);
+passport.use(
+  new SlackStrategy(
+    {
+      clientID: keys.SLACK.clientID,
+      clientSecret: keys.SLACK.clientSecret,
+      callbackURL: '/auth/slack/callback',
     },
     (accessToken, refreshToken, profile, cb) => {
       console.log(chalk.blue(JSON.stringify(profile)));
@@ -186,6 +197,10 @@ server.get('/auth/spotify/callback', passport.authenticate('spotify'), (req, res
 
 server.get('/auth/twitter', passport.authenticate('twitter'));
 server.get('/auth/twitter/callback', passport.authenticate('twitter'), (req, res) => {
+  res.redirect('/profile');
+});
+server.get('/auth/slack', passport.authenticate('slack'));
+server.get('/auth/slack/callback', passport.authenticate('slack'), (req, res) => {
   res.redirect('/profile');
 });
 

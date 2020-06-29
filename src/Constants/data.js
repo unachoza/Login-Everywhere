@@ -4,7 +4,8 @@ import GithubIcon from 'assests/github.png';
 import GoogleIcon from 'assests/google.png';
 import InstagramIcon from 'assests/instagram.png';
 import SpotifyIcon from 'assests/spotify.png';
-import TwitchIcon from 'assests/twitch.png';
+import TwitterIcon from 'assests/twitter.png';
+import YouTubeIcon from 'assests/youtube.png';
 
 export const data = [
   {
@@ -63,11 +64,19 @@ export const data = [
     txt: 'Login with Spotify',
   },
   {
-    img: TwitchIcon,
-    name: 'twitch.js',
+    img: TwitterIcon,
+    name: 'twitter',
     href: 'auth/twitter',
-    alt: 'twitch-icon',
-    color: '#5F3BAD',
-    txt: 'Login with Twitch',
+    alt: 'twitter-icon',
+    color: '#2eaae1',
+    txt: 'Login with Twitter',
+  },
+  {
+    img: YouTubeIcon,
+    name: 'YouTube',
+    href: 'auth/youtube',
+    alt: 'youtube-icon',
+    color: '#ff0100',
+    txt: 'Login with YouTube',
   },
 ];

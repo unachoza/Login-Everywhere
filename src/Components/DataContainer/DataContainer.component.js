@@ -1,11 +1,37 @@
-import React from 'react';
+// import React from 'react';
 import 'Components/DataContainer/DataContainer.styles.css';
 
-const DataContainer = () => {
+// const DataContainer = () => {
+//   return (
+//     <div>
+//       <div className="title">DataContainer Title</div>
+//     </div>
+
+//   );
+// };
+// export default DataContainer;
+
+import React from 'react';
+
+const Terminal = ({ userData, selected }) => {
+  const selectedData = selected === 'All' ? userData : userData[selected];
+  const jsonCode = JSON.stringify(userData, null, 4);
+
   return (
-    <div>
-      <div className="title">DataContainer Title</div>
+    <div className="window">
+      <div className="title-bar">
+        <div className="buttons">
+          <div className="mac-btn close" />
+          <div className="mac-btn minimize" />
+          <div className="mac-btn zoom" />
+        </div>
+        <p style={{ textAlign: 'left', margin: 0 }}>json-terminal</p>
+      </div>
+      <div className="content">
+        <pre>{jsonCode}</pre>
+      </div>
     </div>
   );
 };
-export default DataContainer;
+
+export default Terminal;

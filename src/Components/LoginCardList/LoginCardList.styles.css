@@ -5,5 +5,6 @@
   border: hotpink 5px solid;
   display: flex;
   height: 600px;
+  width: 70%;
   flex-wrap: wrap;
 }

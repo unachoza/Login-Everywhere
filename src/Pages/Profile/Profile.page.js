@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import UserProvider from 'Contexts/UserProvider';
+import Terminal from 'Components/DataContainer/DataContainer.component';
 import 'Pages/Profile/Profile.styles.css';
 import 'Components/Button/Button.styles.css';
 import { Link } from 'react-router-dom';
@@ -20,6 +21,7 @@ const Profile = () => {
 
       <div className="container">
         <div className="title">Discover Your Data</div>
+        <Terminal userData={userData} />
       </div>
     </>
   );

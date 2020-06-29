@@ -235,6 +235,19 @@ server.get('/auth/slack', passport.authenticate('slack'));
 server.get('/auth/slack/callback', passport.authenticate('slack'), (req, res) => {
   res.redirect('/profile');
 });
+server.get('/auth/linkedin', passport.authenticate('linkedin'));
+server.get('/auth/linkedin/callback', passport.authenticate('linkedin'), (req, res) => {
+  res.redirect('/profile');
+});
+server.get(
+  '/auth/youtube',
+  passport.authenticate('youtube', {
+    scope: ['profile', 'email'],
+  })
+);
+server.get('/auth/youtube/callback', passport.authenticate('youtube'), (req, res) => {
+  res.redirect('/profile');
+});
 
 server.get('/user', (req, res) => {
   res.send(user);

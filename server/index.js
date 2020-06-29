@@ -6,14 +6,13 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const AmazonStrategy = require('passport-amazon').Strategy;
 const GithubStrategy = require('passport-github').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-
 const InstagramStrategy = require('passport-instagram').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
+const SpotifyStrategy = require('passport-spotify').Strategy;
 const keys = require('../src/Config/keysIndex.js~');
 const chalk = require('chalk');
 
 let user = {};
-
 passport.serializeUser((user, cb) => {
   console.log('what is going on with serialize', user, cb);
   cb(null, user);
@@ -33,9 +32,9 @@ passport.use(
     (accessToken, refreshToken, profile, cb) => {
       console.log(chalk.blue(JSON.stringify(profile)));
       user = { ...profile };
-      // server.post('/user', (req, res) => {
-      //   res.send(user);
-      // });
+      server.post('/user', (req, res) => {
+        res.send(user);
+      });
       return cb(null, profile);
     }
   )
@@ -104,20 +103,35 @@ passport.use(
   )
 );
 
-// passport.use(
-//   new TwitterStrategy(
-//     {
-//       clientID: keys.TWITTER.clientID,
-//       clientSecret: keys.TWITTER.clientSecret,
-//       callbackURL: '/auth/twitter/callback',
-//     },
-//     (accessToken, refreshToken, profile, cb) => {
-//       console.log(chalk.blue(JSON.stringify(profile)));
-//       user = { ...profile };
-//       return cb(null, profile);
-//     }
-//   )
-// );
+passport.use(
+  new SpotifyStrategy(
+    {
+      clientID: keys.SPOTIFY.clientID,
+      clientSecret: keys.SPOTIFY.clientSecret,
+      callbackURL: '/auth/spotify/callback',
+    },
+    (accessToken, refreshToken, profile, cb) => {
+      console.log(chalk.blue(JSON.stringify(profile)));
+      user = { ...profile };
+      return cb(null, profile);
+    }
+  )
+);
+passport.use(
+  new TwitterStrategy(
+    {
+      consumerKey: keys.TWITTER.consumerKey,
+      consumerSecret: keys.TWITTER.consumerSecret,
+      callbackURL: '/auth/twitter/callback',
+      includeEmail: true,
+    },
+    (accessToken, refreshToken, profile, cb) => {
+      console.log(chalk.blue(JSON.stringify(profile)));
+      user = { ...profile };
+      return cb(null, profile);
+    }
+  )
+);
 
 const server = express();
 server.use(cors());
@@ -125,15 +139,10 @@ server.use(passport.initialize());
 
 server.use(bodyParser.json()); // support json encoded bodies
 server.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-server.get('/auth/facebook/', passport.authenticate('facebook'));
-server.get('auth/facebook/callback', passport.authenticate('facebook'), (req, res) => res.redirect('/profile'));
+server.get('/auth/facebook', passport.authenticate('facebook'));
+server.get('/auth/facebook/callback', passport.authenticate('facebook'), (req, res) => res.redirect('/profile'));
 
-server.get(
-  '/auth/amazon',
-  passport.authenticate('amazon', {
-    scope: ['profile'],
-  })
-);
+server.get('/auth/amazon', passport.authenticate('amazon', { scope: ['profile'] }));
 server.get('/auth/amazon/callback', passport.authenticate('amazon'), (req, res) => {
   console.log(res.user);
   res.redirect('/profile');
@@ -162,14 +171,21 @@ server.get('/auth/instagram', passport.authenticate('instagram'));
 server.get('/auth/instagram/callback', passport.authenticate('instagram'), (req, res) => {
   res.redirect('/profile');
 });
+server.get('/auth/spotify', passport.authenticate('spotify'));
+server.get('/auth/spotify/callback', passport.authenticate('spotify'), (req, res) => {
+  res.redirect('/profile');
+});
+
+server.get('/auth/twitter', passport.authenticate('twitter'));
+server.get('/auth/twitter/callback', passport.authenticate('twitter'), (req, res) => {
+  res.redirect('/profile');
+});
 
 server.get('/user', (req, res) => {
-  console.log('calling users', res, req);
-  console.log('getting user data');
   res.send(user);
 });
 
-server.get('/auth/logoit', (req, res) => {
+server.get('/auth/logout', (req, res) => {
   console.log('loggin out');
   user = {};
   res.redirect('/');

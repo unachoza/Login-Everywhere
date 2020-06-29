@@ -10,7 +10,7 @@ const Homepage = () => {
     <div className="app-container">
       <Header />
       <div className="title">Login Everywhere From Here</div>
-      <a href="http://localhost:5000/auth/google">Sign in with Twitter</a>
+      <a href="http://localhost:5000/auth/twitter">Sign in with Twitter</a>
       {/* <FBLogin /> */}
       <LoginCardList />
 

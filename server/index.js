@@ -15,6 +15,7 @@ const chalk = require('chalk');
 let user = {};
 
 passport.serializeUser((user, cb) => {
+  console.log('what is going on with serialize', user, cb);
   cb(null, user);
 });
 
@@ -32,9 +33,9 @@ passport.use(
     (accessToken, refreshToken, profile, cb) => {
       console.log(chalk.blue(JSON.stringify(profile)));
       user = { ...profile };
-      server.post('/user', (req, res) => {
-        res.send(user);
-      });
+      // server.post('/user', (req, res) => {
+      //   res.send(user);
+      // });
       return cb(null, profile);
     }
   )
@@ -48,11 +49,9 @@ passport.use(
       callbackURL: 'http://localhost:3000/auth/amazon/callback',
     },
     (accessToken, refreshToken, profile, cb) => {
-      console.log(chalk.blue(JSON.stringify(profile)));
       user = { ...profile };
-      console.log(user);
       server.post('/user', (req, res) => {
-        res.send(user, 'here');
+        user.send(user, 'here');
       });
       return cb(null, profile);
     }
@@ -66,7 +65,6 @@ passport.use(
       callbackURL: 'http://localhost:3000/auth/github/callback',
     },
     (accessToken, refreshToken, profile, cb) => {
-      console.log(chalk.blue(JSON.stringify(profile)));
       user = { ...profile };
       return cb(null, profile);
     }
@@ -129,6 +127,7 @@ server.use(bodyParser.json()); // support json encoded bodies
 server.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 server.get('/auth/facebook/', passport.authenticate('facebook'));
 server.get('auth/facebook/callback', passport.authenticate('facebook'), (req, res) => res.redirect('/profile'));
+
 server.get(
   '/auth/amazon',
   passport.authenticate('amazon', {
@@ -164,7 +163,7 @@ server.get('/auth/instagram/callback', passport.authenticate('instagram'), (req,
   res.redirect('/profile');
 });
 
-server.get('/users', (req, res) => {
+server.get('/user', (req, res) => {
   console.log('calling users', res, req);
   console.log('getting user data');
   res.send(user);

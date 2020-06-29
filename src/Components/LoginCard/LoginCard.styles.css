@@ -1,9 +1,9 @@
 .login-title {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 15px;
-  position: absolute;
+  position: relative;
   color: white;
-  top: 20px;
+  top: 10px;
 }
 .card {
   margin: 10px;

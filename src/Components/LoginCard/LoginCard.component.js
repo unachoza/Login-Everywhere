@@ -3,14 +3,12 @@ import 'Components/LoginCard/LoginCard.styles.css';
 
 const LoginCard = ({ img, name, href, color, colors }) => {
   const NAME = name.charAt(0).toUpperCase() + name.substring(1, name.length);
-  console.log('href', href);
   return (
     <div className="card" onClick={() => (window.location = `${href}`)}>
-      <div className="login-title">{NAME} </div>
       {name === 'instagram' || name === 'slack' ? (
         <div
           style={{
-            borderRadius: '4px',
+            borderRadius: '10px',
             height: 150,
             width: 150,
             background: `radial-gradient(circle farthest-corner at 35% 90%, ${colors.leftBot}, transparent 50%),
@@ -23,29 +21,33 @@ const LoginCard = ({ img, name, href, color, colors }) => {
         ${colors.baseCoat}`,
           }}
         >
+          <div className="login-title">{NAME}</div>
+
           <div
             className="image-container"
             style={{
               display: 'flex',
-              height: 150,
+              height: 130,
               width: 150,
               alignItems: 'center',
               justifyContent: 'center',
             }}
           >
-            <img src={img} style={{ width: '50%' }} alt="instagram" className="btn-icon" />
+            <img src={img} style={{ width: '50%', float: 'float' }} alt={name} className="btn-icon" />
           </div>
         </div>
       ) : (
         <div
           className="login-button"
           style={{
-            borderRadius: '4px',
+            borderRadius: '10px',
             height: 150,
             width: 150,
             background: `url("${img}") no-repeat center center / 50% ${color}`,
           }}
-        ></div>
+        >
+          <div className="login-title">{NAME}</div>
+        </div>
       )}
     </div>
   );

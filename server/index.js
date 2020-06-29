@@ -13,12 +13,13 @@ const SpotifyStrategy = require('passport-spotify').Strategy;
 const SlackStrategy = require('passport-slack').Strategy;
 const YoutubeStrategy = require('passport-youtube').Strategy;
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
+const BumAPI = require('bumbleapi')('4153107944', 'T0urjettee');
 const keys = require('../src/Config/keysIndex.js~');
 const chalk = require('chalk');
 
 let user = {};
+
 passport.serializeUser((user, cb) => {
-  console.log('what is going on with serialize', user, cb);
   cb(null, user);
 });
 
@@ -51,6 +52,7 @@ passport.use(
       callbackURL: 'http://localhost:3000/auth/amazon/callback',
     },
     (accessToken, refreshToken, profile, cb) => {
+      console.log(profile);
       user = { ...profile };
       server.post('/user', (req, res) => {
         user.send(user, 'here');
@@ -155,7 +157,6 @@ passport.use(
       callbackURL: '/auth/youtube/callback',
     },
     (accessToken, refreshToken, profile, cb) => {
-      console.log(chalk.blue(JSON.stringify(profile)));
       user = { ...profile };
       return cb(null, profile);
     }
@@ -167,7 +168,7 @@ passport.use(
       clientID: keys.LINKEDIN.clientID,
       clientSecret: keys.LINKEDIN.clientSecret,
       callbackURL: 'http://localhost:3000/auth/linkedin/callback',
-      scope: ['r_emailaddress', 'r_basicprofile'],
+      // scope: ['r_emailaddress', 'r_basicprofile'],
     },
     (accessToken, refreshToken, profile, cb) => {
       console.log(chalk.blue(JSON.stringify(profile)));
@@ -186,6 +187,18 @@ server.use(
     saveUninitialized: false,
   })
 );
+
+BumAPI.startup().then((res) => {
+  console.log(res, 'from bumble');
+});
+// const getBumble = async () => {
+//   let bumbleData = await BumAPI.getEncounters();
+//   console.log(bumbleData.json(), 'what is the data');
+//   console.log(bumbleData.stringify(), 'what is the data');
+// };
+// BumAPI.getEncounters().then((data) => console.log(response));
+// getBumble();
+
 server.use(passport.initialize());
 server.use(passport.session());
 server.use(bodyParser.json()); // support json encoded bodies
@@ -195,7 +208,6 @@ server.get('/auth/facebook/callback', passport.authenticate('facebook'), (req, r
 
 server.get('/auth/amazon', passport.authenticate('amazon', { scope: ['profile'] }));
 server.get('/auth/amazon/callback', passport.authenticate('amazon'), (req, res) => {
-  console.log(res.user);
   res.redirect('/profile');
 });
 
@@ -235,8 +247,8 @@ server.get('/auth/slack', passport.authenticate('slack'));
 server.get('/auth/slack/callback', passport.authenticate('slack'), (req, res) => {
   res.redirect('/profile');
 });
-server.get('/auth/linkedin', passport.authenticate('linkedin'));
-server.get('/auth/linkedin/callback', passport.authenticate('linkedin'), (req, res) => {
+server.get('/auth/linkedin/', passport.authenticate('linkedin'));
+server.get('/auth/linkedin/callback/', passport.authenticate('linkedin'), (req, res) => {
   res.redirect('/profile');
 });
 server.get(

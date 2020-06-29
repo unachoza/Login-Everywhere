@@ -3,6 +3,7 @@ import 'Components/LoginCard/LoginCard.styles.css';
 
 const LoginCard = ({ img, name, href, color }) => {
   const NAME = name.charAt(0).toUpperCase() + name.substring(1, name.length);
+  console.log('href', href);
   return (
     <div className="card" onClick={() => (window.location = `${href}`)}>
       <div className="login-title">{NAME} </div>

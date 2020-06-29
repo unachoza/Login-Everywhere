@@ -20,6 +20,8 @@
     "passport-github": "^1.1.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-instagram": "^1.0.0",
+    "passport-slack": "0.0.7",
+    "passport-spotify": "^1.1.0",
     "passport-twitter": "^1.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

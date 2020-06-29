@@ -65,7 +65,7 @@ export const data = [
   {
     img: TwitchIcon,
     name: 'twitch.js',
-    href: 'auth/twitch',
+    href: 'auth/twitter',
     alt: 'twitch-icon',
     color: '#5F3BAD',
     txt: 'Login with Twitch',

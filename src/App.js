@@ -5,7 +5,6 @@ import Homepage from 'Pages/Homepage/Homepage.page.js';
 import UserProvider from 'Contexts/UserProvider';
 import Profile from 'Pages/Profile/Profile.page.js';
 // import MenuBar from './components/menus/MenuBar';
-import Footer from 'Components/Footer/Footer.component';
 
 class App extends Component {
   render() {

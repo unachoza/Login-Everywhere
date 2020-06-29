@@ -2,14 +2,15 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
   font-size: 35px;
-  color: darkblue;
+  color: white;
 }
 
 .window {
-  width: 80%;
+  width: 65%;
   margin: 0 auto;
   background: white;
   border-radius: 6px;
+  border: solid rgb(51, 50, 50) 2px;
 }
 
 .title-bar {

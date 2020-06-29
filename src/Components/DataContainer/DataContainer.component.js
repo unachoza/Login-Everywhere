@@ -26,7 +26,7 @@ const Terminal = ({ userData, selected }) => {
           <div className="mac-btn minimize" />
           <div className="mac-btn zoom" />
         </div>
-        <p style={{ textAlign: 'right', margin: 0 }}>json-terminal</p>
+        <p style={{ textAlign: 'right', margin: '5px 10px' }}>json-terminal</p>
       </div>
       <div className="content">
         <pre>{jsonCode}</pre>

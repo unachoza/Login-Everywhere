@@ -13,7 +13,6 @@ const SpotifyStrategy = require('passport-spotify').Strategy;
 const SlackStrategy = require('passport-slack').Strategy;
 const YoutubeStrategy = require('passport-youtube').Strategy;
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
-const BumAPI = require('bumbleapi')('4153107944', 'T0urjettee');
 const keys = require('../src/Config/keysIndex.js~');
 const chalk = require('chalk');
 
@@ -188,22 +187,11 @@ server.use(
   })
 );
 
-BumAPI.startup().then((res) => {
-  console.log(res, 'from bumble');
-});
-// const getBumble = async () => {
-//   let bumbleData = await BumAPI.getEncounters();
-//   console.log(bumbleData.json(), 'what is the data');
-//   console.log(bumbleData.stringify(), 'what is the data');
-// };
-// BumAPI.getEncounters().then((data) => console.log(response));
-// getBumble();
-
 server.use(passport.initialize());
 server.use(passport.session());
 server.use(bodyParser.json()); // support json encoded bodies
 server.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-server.get('/auth/facebook', passport.authenticate('facebook'));
+server.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 server.get('/auth/facebook/callback', passport.authenticate('facebook'), (req, res) => res.redirect('/profile'));
 
 server.get('/auth/amazon', passport.authenticate('amazon', { scope: ['profile'] }));
@@ -254,7 +242,7 @@ server.get('/auth/linkedin/callback/', passport.authenticate('linkedin'), (req, 
 server.get(
   '/auth/youtube',
   passport.authenticate('youtube', {
-    scope: ['profile', 'email'],
+    scope: ['profile'],
   })
 );
 server.get('/auth/youtube/callback', passport.authenticate('youtube'), (req, res) => {

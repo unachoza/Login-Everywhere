@@ -12,13 +12,9 @@ const Profile = () => {
     <>
       <div className="nav-buttons">
         <Link to="/">
-          <button>Return Home</button>
-        </Link>
-        <Link to="/">
-          <button>Log Out</button>
+          <button>Return Home & Log Out</button>
         </Link>
       </div>
-
       <div className="container">
         <div className="title">Discover Your Data</div>
         <Terminal userData={userData} />

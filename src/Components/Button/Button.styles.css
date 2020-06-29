@@ -1,0 +1,34 @@
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  transition: all 0.2s;
+}
+button::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+button:active,
+button:focus {
+  outline: none;
+  transform: translateY(-1px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  transition: all 0.2s;
+}
+
+button {
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: darkblue;
+  box-shadow: 0 10px rgba(0, 0, 0, 0 0.2);
+  color: white;
+  border: none;
+  font-size: 14px;
+  margin: 5px;
+}
+.nav-buttons {
+  display: flex;
+  justify-content: flex-end;
+}

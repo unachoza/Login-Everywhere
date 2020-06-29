@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const AmazonStrategy = require('passport-amazon').Strategy;
@@ -13,6 +14,14 @@ const chalk = require('chalk');
 
 let user = {};
 
+passport.serializeUser((user, cb) => {
+  cb(null, user);
+});
+
+passport.deserializeUser((user, cb) => {
+  cb(null, user);
+});
+
 passport.use(
   new FacebookStrategy(
     {
@@ -23,6 +32,9 @@ passport.use(
     (accessToken, refreshToken, profile, cb) => {
       console.log(chalk.blue(JSON.stringify(profile)));
       user = { ...profile };
+      server.post('/user', (req, res) => {
+        res.send(user);
+      });
       return cb(null, profile);
     }
   )
@@ -38,6 +50,10 @@ passport.use(
     (accessToken, refreshToken, profile, cb) => {
       console.log(chalk.blue(JSON.stringify(profile)));
       user = { ...profile };
+      console.log(user);
+      server.post('/user', (req, res) => {
+        res.send(user, 'here');
+      });
       return cb(null, profile);
     }
   )
@@ -67,6 +83,9 @@ passport.use(
     (accessToken, refreshToken, profile, cb) => {
       console.log(chalk.blue(JSON.stringify(profile)));
       user = { ...profile };
+      server.post('/user', (req, res) => {
+        res.send(user);
+      });
       return cb(null, profile);
     }
   )
@@ -102,18 +121,12 @@ passport.use(
 //   )
 // );
 
-passport.serializeUser((user, cb) => {
-  cb(null, user);
-});
-
-passport.deserializeUser((user, cb) => {
-  cb(null, user);
-});
-
 const server = express();
 server.use(cors());
 server.use(passport.initialize());
 
+server.use(bodyParser.json()); // support json encoded bodies
+server.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 server.get('/auth/facebook/', passport.authenticate('facebook'));
 server.get('auth/facebook/callback', passport.authenticate('facebook'), (req, res) => res.redirect('/profile'));
 server.get(
@@ -123,6 +136,7 @@ server.get(
   })
 );
 server.get('/auth/amazon/callback', passport.authenticate('amazon'), (req, res) => {
+  console.log(res.user);
   res.redirect('/profile');
 });
 
@@ -151,6 +165,7 @@ server.get('/auth/instagram/callback', passport.authenticate('instagram'), (req,
 });
 
 server.get('/users', (req, res) => {
+  console.log('calling users', res, req);
   console.log('getting user data');
   res.send(user);
 });

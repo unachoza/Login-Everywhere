@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Homepage from 'Pages/Homepage/Homepage.page.js';
-// import history from './history';
 import UserProvider from 'Contexts/UserProvider';
 import Profile from 'Pages/Profile/Profile.page.js';
 import Error from 'Pages/Error/Error.page.js';
-// import MenuBar from './components/menus/MenuBar';
 
 class App extends Component {
   render() {

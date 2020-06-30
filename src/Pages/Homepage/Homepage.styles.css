@@ -14,3 +14,39 @@
   justify-content: center;
   font-family: 'Raleway', sans-serif;
 }
+
+/* .app-container {
+  height: 100vh;
+  width: 100vw;
+  background-image: url('https://res.cloudinary.com/dh41vh9dx/image/upload/v1592666582/locksBackground.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: rgba(168, 161, 161, 0.171);
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+  border: solid green 3px;
+  top: 50%;
+  left: 50%;
+} */
+
+/* You could use :after - it doesn't really matter */
+/* .app-container:after {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.6;
+  background-image: url('https://res.cloudinary.com/dh41vh9dx/image/upload/v1592666582/locksBackground.jpg');
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+} */

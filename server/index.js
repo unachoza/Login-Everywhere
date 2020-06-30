@@ -51,7 +51,6 @@ passport.use(
       callbackURL: 'http://localhost:3000/auth/amazon/callback',
     },
     (accessToken, refreshToken, profile, cb) => {
-      console.log(profile);
       user = { ...profile };
       server.post('/user', (req, res) => {
         user.send(user, 'here');
@@ -170,7 +169,6 @@ passport.use(
       // scope: ['r_emailaddress', 'r_basicprofile'],
     },
     (accessToken, refreshToken, profile, cb) => {
-      console.log(chalk.blue(JSON.stringify(profile)));
       user = { ...profile };
       return cb(null, profile);
     }
@@ -218,10 +216,8 @@ server.get('/auth/instagram', passport.authenticate('instagram'));
 server.get('/auth/instagram/callback', passport.authenticate('instagram'), (req, res) => {
   res.redirect('/profile');
 });
-server.get('/auth/instagram', passport.authenticate('instagram'));
-server.get('/auth/instagram/callback', passport.authenticate('instagram'), (req, res) => {
-  res.redirect('/profile');
-});
+// add more scope later
+// { scope: ['user-read-private', 'user-read-email', 'playlist-read-private', 'user-top-read'] }
 server.get('/auth/spotify', passport.authenticate('spotify'));
 server.get('/auth/spotify/callback', passport.authenticate('spotify'), (req, res) => {
   res.redirect('/profile');

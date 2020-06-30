@@ -238,7 +238,7 @@ server.get('/auth/linkedin/callback/', passport.authenticate('linkedin'), (req, 
 server.get(
   '/auth/youtube',
   passport.authenticate('youtube', {
-    scope: ['profile'],
+    scope: ['email'],
   })
 );
 server.get('/auth/youtube/callback', passport.authenticate('youtube'), (req, res) => {

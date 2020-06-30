@@ -16,7 +16,8 @@ import React from 'react';
 const Terminal = ({ userData, selected }) => {
   const selectedData = selected === 'All' ? userData : userData[selected];
   const removeRaw = (name, val) => (name === '_raw' ? undefined : val);
-  const jsonCode = JSON.stringify(userData, removeRaw, 4);
+  let jsonCode;
+  userData !== 'none' ? (jsonCode = JSON.stringify(userData, removeRaw, 4)) : (jsonCode = null);
 
   return (
     <div className="window">

@@ -45,7 +45,7 @@ export const data = [
   {
     img: InstagramIcon,
     name: 'instagram',
-    href: 'auth/instagram',
+    href: '/error',
     alt: 'instagram-icon',
     colors: {
       leftBot: '#fec564',
@@ -76,7 +76,7 @@ export const data = [
   {
     img: YouTubeIcon,
     name: 'YouTube',
-    href: 'auth/youtube',
+    href: '/error',
     alt: 'youtube-icon',
     color: '#ff0100',
     txt: 'Login with YouTube',

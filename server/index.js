@@ -32,6 +32,7 @@ passport.use(
       clientID: keys.FACEBOOK.clientID,
       clientSecret: keys.FACEBOOK.clientSecret,
       callbackURL: 'http://localhost:3000/auth/facebook/callback',
+      profileFields: ['id', 'displayName', 'photos', 'email'],
     },
     (accessToken, refreshToken, profile, cb) => {
       user = { ...profile };
@@ -189,7 +190,7 @@ server.use(passport.initialize());
 server.use(passport.session());
 server.use(bodyParser.json()); // support json encoded bodies
 server.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-server.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
+server.get('/auth/facebook', passport.authenticate('facebook', { failureRedirect: '/error' }, { scope: ['email'] }));
 server.get('/auth/facebook/callback', passport.authenticate('facebook'), (req, res) => res.redirect('/profile'));
 
 server.get('/auth/amazon', passport.authenticate('amazon', { scope: ['profile'] }));
@@ -212,8 +213,10 @@ server.get('/auth/google/callback', passport.authenticate('google'), (req, res) 
   res.redirect('/profile');
 });
 
-server.get('/auth/instagram', passport.authenticate('instagram'));
+server.get('/auth/instagram', passport.authenticate('instagram', { failureRedirect: '/error' }));
 server.get('/auth/instagram/callback', passport.authenticate('instagram'), (req, res) => {
+  console.log(res.statusCode);
+
   res.redirect('/profile');
 });
 // add more scope later
@@ -237,9 +240,13 @@ server.get('/auth/linkedin/callback/', passport.authenticate('linkedin'), (req, 
 });
 server.get(
   '/auth/youtube',
-  passport.authenticate('youtube', {
-    scope: ['email'],
-  })
+  passport.authenticate(
+    'youtube',
+    {
+      scope: ['email'],
+    },
+    { failureRedirect: '/error' }
+  )
 );
 server.get('/auth/youtube/callback', passport.authenticate('youtube'), (req, res) => {
   res.redirect('/profile');

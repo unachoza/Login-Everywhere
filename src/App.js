@@ -4,6 +4,7 @@ import Homepage from 'Pages/Homepage/Homepage.page.js';
 // import history from './history';
 import UserProvider from 'Contexts/UserProvider';
 import Profile from 'Pages/Profile/Profile.page.js';
+import Error from 'Pages/Error/Error.page.js';
 // import MenuBar from './components/menus/MenuBar';
 
 class App extends Component {
@@ -14,6 +15,7 @@ class App extends Component {
           <Route exact path="/" component={Homepage} />
           <UserProvider>
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/error" component={Error} />
           </UserProvider>
         </Switch>
       </div>

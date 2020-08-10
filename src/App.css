@@ -6,4 +6,8 @@ div {
 }
 body {
   background: linear-gradient(45.34deg, #119da4 5.66%, #9bc7b2 31.53%, #ffe5bb 50.01%, #ffbe99 72.18%, #ff886a 94.35%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
 }
